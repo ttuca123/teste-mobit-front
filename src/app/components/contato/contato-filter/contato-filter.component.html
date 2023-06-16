@@ -1,80 +1,55 @@
-<div layout="column" layout-fill>
-  <div align="center" layout="row">
-    <mat-card
-      class="info-card mat-elevation-z8"
-      flex="80"
-      style="margin-top: 15px"
+<div class="card-body table-responsive">
+  <form
+    #microsoftUpdateFilter="ngForm"
+    class="navbar-form"
+    (ngSubmit)="buscar()"
+  >
+    <mat-form-field class="example-full-width">
+      <mat-label>Nome</mat-label>
+      <input
+        name="nome"
+        matInput
+        required
+        placeholder="Nome"
+        [(ngModel)]="filtro.nome"
+        #Nome="ngModel"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Sobrenome</mat-label>
+      <input
+        name="sobrenome"
+        matInput
+        placeholder="SobreNome"
+        [(ngModel)]="filtro.sobrenome"
+        #SobreNome="ngModel"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Cpf</mat-label>
+      <input
+        name="cpf"
+        matInput
+        placeholder="Cpf"
+        [(ngModel)]="filtro.cpf"
+        #Cpf="ngModel"
+      />
+    </mat-form-field>
+
+    <button
+      name="filtro"
+      mat-raised-button
+      type="submit"
+      class="btn btn-white btn-round btn-just-icon"
     >
-      <mat-card-title> Filtro de Contatos </mat-card-title>
-
-      <mat-card-content fxLayout="column" fxLayoutAlign="left">
-        <form
-          #contatoFilter="ngForm"
-          fxLayout="column"
-          fxLayoutAlign="start stretch"
-          (ngSubmit)="buscar()"
-        >
-          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-form-field fxFlex="45">
-              <input
-                name="nome"
-                matInput
-                type="text"
-                placeholder="Nome"                
-                #nomeField="ngModel"
-              />
-            </mat-form-field>  
-            
-            <mat-form-field fxFlex="45">
-              <input
-                name="sobrenome"
-                matInput
-                type="text"
-                placeholder="Sobrenome"                
-                #sobrenomeField="ngModel"
-              />
-            </mat-form-field>  
-          </div>
-
-
-
-          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
-            < <mat-form-field fxFlex="45">
-                    <input
-                      id="cpf"
-                      name="cpf"
-                      autocomplete="off"
-                      required
-                      minlength="11"
-                      matInput
-                      type="number"
-                      class="form-control {{
-                        contato.cpf === '' || contato.cpf === undefined
-                          ? ''
-                          : cpfValido
-                          ? 'is-valid'
-                          : 'is-invalid'
-                      }}"
-                      value=""
-                      placeholder="CPF"
-                      [value]="contato.cpf"
-                      #inputCpf
-                      (input)="atualizaCpf(inputCpf.value)"
-                    />
-                  </mat-form-field>
-          </div>
-
-          <button
-            mat-button
-            color="primary"
-            type="submit"
-            class="btn-buscar"
-            style="left: calc(100% - 54%)"            
-          >
-            Buscar
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <i class="material-icons">search</i>
+      <div class="ripple-container"></div>
+    </button>
+  </form>
 </div>
+<app-contato-list
+  [pager]="pager"
+  (paginar)="paginar($event)"
+></app-contato-list>

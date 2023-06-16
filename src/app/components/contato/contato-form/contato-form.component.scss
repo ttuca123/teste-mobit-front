@@ -1,0 +1,30 @@
+.btn-salvar {
+  left: 6% !important;
+}
+table {
+  width: 100%;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 10px 10px 10px 0;
+}
+tr.mat-header-row {
+  height: 56px;
+  font-family: "Segoe UI", "Roboto", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+th.mat-header-cell {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border: 0px !important;
+  border-bottom: 1px solid #e9ecef !important;
+  background: #f8f9fa !important;
+  color: #495057 !important;
+}

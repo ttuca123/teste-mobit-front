@@ -1,22 +1,59 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DoCheck,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { isCPF } from 'brazilian-values';
+import { Subscription } from 'rxjs';
+import { PageForm } from 'src/app/utils/page-form';
+import { Contato } from 'src/app/dto/contato';
+import { ContatoService } from 'src/app/services/contato.service';
 
 @Component({
   selector: 'app-contato-filter',
   templateUrl: './contato-filter.component.html',
-  styleUrls: ['./contato-filter.component.scss']
+  styleUrls: ['./contato-filter.component.scss'],
 })
-export class ContatoFilterComponent {
+export class ContatoFilterComponent implements OnInit, OnDestroy, DoCheck {
+  @Input() filtro: any;
+  pager: PageForm = new PageForm();
+  subscription?: Subscription;
 
-  contato: any;
-  cpfValido: boolean = false;
+  constructor(private contatoService: ContatoService) {}
 
+  //Hook responsável por detectar mudanças nos valores dos campos
+  ngDoCheck(): void {
+    this.pager.filtrado = false;
+  }
 
-  atualizaCpf(cpf: string) {
-    this.contato.cpf = cpf;
+  ngOnInit() {
+    this.filtro = this.contatoService.novo();
+    this.pager = new PageForm();
+  }
 
-    this.cpfValido = isCPF(cpf);
+  public paginar($event: any) {
+    this.buscar();
+  }
 
-    console.log(this.cpfValido);
+  public buscar() {
+    (this.subscription = this.contatoService
+      .filter(this.pager.pageable.pageNumber, this.pager.size, this.filtro)
+      .subscribe((page: any) => {
+        this.pager = page;
+      })),
+      (err: any) => {
+        console.error(err);
+      };
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
