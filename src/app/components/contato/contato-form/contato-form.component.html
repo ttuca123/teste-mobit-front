@@ -1,18 +1,19 @@
 <form
-  #contatoForm="ngForm"
-  fxLayout="column"
-  fxLayoutAlign="start stretch"
-  (ngSubmit)="onSubmit()"
->
-  <div layout="column" layout-fill>
-    <div layout="row" layout-align="center center" style="margin: 15px">
-      <button class="btn btn-primary btn-voltar" id="voltar">Voltar</button>
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    #contatoForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    id="form_contato"
+  >
+  
+    <div layout="row" layout-align="center center" style="margin: 5px">
+      <button class="btn btn-primary btn-voltar" id="voltar" type="button" (click)="voltar()">Voltar</button>
     </div>
     <div align="center" layout="row" layout-align="center center">
       <mat-card
         class="info-card mat-elevation-z8"
-        flex="80"
-        style="margin-top: 50px; max-width: 800px"
+       
+        style="margin-top: 40px; max-width: 800px"
       >
         <mat-card-title> Contato </mat-card-title>
         <mat-card-subtitle> Cadastro</mat-card-subtitle>
@@ -20,13 +21,7 @@
         <mat-tab-group mat-align-tabs="center">
           <mat-tab label="Dados Contato">
             <mat-card-content fxLayout="column" fxLayoutAlign="left">
-              <form
-                fxLayout="column"
-                fxLayoutAlign="start stretch"
-                #contatoForm="ngForm"
-                (ngSubmit)="onSubmit()"
-                id="form_contato"
-              >
+              
                 <div fxFlex="100" fxLayoutAlign="start">
                   <h4>Dados Pessoais:</h4>
                 </div>
@@ -35,12 +30,13 @@
                   fxLayout="row"
                   fxLayoutAlign="space-between  start"
                 >
-                  <mat-form-field fxFlex="45">
+                  <mat-form-field >
                     <input
                       id="codigo"
                       name="codigo"
                       autocomplete="off"
                       required
+                      disabled
                       matInput
                       type="text"
                       class="form-control"
@@ -51,12 +47,8 @@
                     />
                   </mat-form-field>
                 </div>
-                <div
-                  fxFlex="100"
-                  fxLayout="row"
-                  fxLayoutAlign="space-between  start"
-                >
-                  <mat-form-field fxFlex="45">
+                
+                  <mat-form-field >
                     <input
                       id="nome"
                       name="nome"
@@ -76,12 +68,16 @@
                       <p>Campo Nome é obrigatório</p>
                     </mat-error>
                   </mat-form-field>
-
-                  <mat-form-field fxFlex="45">
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  
+                  <mat-form-field >
                     <input
                       id="sobrenome"
                       name="sobrenome"
-                      autocomplete="off"
+                      autocomplete="off"   
+                      required                   
                       minlength="3"
                       maxlength="100"
                       matInput
@@ -94,36 +90,41 @@
                     />
                     <mat-error *ngIf="sobrenomeField.invalid">
                       <p>Campo SobreNome é obrigatório</p>
-                    </mat-error>
+                    </mat-error>                    
                   </mat-form-field>
-                </div>
+                  <p></p>
+                  <p></p>
+                
 
-                <div
-                  fxFlex="100"
-                  fxLayout="row"
-                  fxLayoutAlign="space-between  start"
-                >
-                  <mat-form-field fxFlex="45">
+                
+                  <mat-form-field >
                     <input
                       id="cpf"
                       name="cpf"
                       autocomplete="off"
                       required
-                      minlength="11"
-                      maxlength="11"
+                      minlength="14"
+                      maxlength="14"
                       matInput
-                      type="number"
+                      type="text"
                       value=""
-                      placeholder="CPF"
-                      [value]="contato.cpf"
-                      (input)="atualizaCpf(cpfField.value)"
+                      mask="000.000.000-00"
+                      placeholder="CPF"                      
+                      #cpfField="ngModel"
+                      [(ngModel)]="contato.cpf"
+                      
                     />
 
                     <mat-error *ngIf="cpfField.invalid">
                       <p>Campo Cpf é obrigatório</p>
                     </mat-error>
                   </mat-form-field>
-                  <mat-form-field fxFlex="45">
+
+                  <p></p>
+                  <p></p>
+                
+                
+                  <mat-form-field >
                     <input
                       id="email"
                       name="email"
@@ -142,8 +143,8 @@
                       <p>Digite um email válido</p>
                     </mat-error>
                   </mat-form-field>
-                </div>
-              </form>
+                
+              
             </mat-card-content>
           </mat-tab>
         </mat-tab-group>
@@ -153,11 +154,16 @@
           mat-button
           color="primary"
           type="submit"
-          [disabled]="!contatoForm.valid"
+          [disabled]="contatoForm.valid"
         >
           <!--<mat-icon>done</mat-icon>-->{{ lblBtnSalvar }}
         </button>
-      </mat-card>
-    </div>
+
+        <mat-hint *ngIf="submitted">
+          <div class="alert alert-success" role="alert">
+            Contato Salvo com Sucesso.
+          </div>
+        </mat-hint>
+      </mat-card>    
   </div>
 </form>

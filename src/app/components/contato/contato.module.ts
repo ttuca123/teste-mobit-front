@@ -7,15 +7,20 @@ import { ContatoFormComponent } from './contato-form/contato-form.component';
 import { FormsModule } from '@angular/forms';
 import { ContatoComponent } from './contato.component';
 import { MaterialModule } from 'src/app/modules/material.module';
+import { ContatoRoutingModule } from './contato-routing.module';
+import { IConfig, NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule, MaterialModule],
+  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, ContatoRoutingModule, NgxMaskDirective],
   declarations: [
     ContatoComponent,
     ContatoFilterComponent,
     ContatoListComponent,
     ContatoFormComponent,
   ],
-  exports: [ContatoFilterComponent, ContatoListComponent, ContatoFormComponent],
+  exports: [],
+  providers: [      
+          provideNgxMask(),          
+    ],
 })
 export class ContatoModule {}

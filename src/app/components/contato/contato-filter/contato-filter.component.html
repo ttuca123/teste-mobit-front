@@ -37,19 +37,21 @@
         #Cpf="ngModel"
       />
     </mat-form-field>
-
-    <button
-      name="filtro"
-      mat-raised-button
-      type="submit"
-      class="btn btn-white btn-round btn-just-icon"
-    >
-      <i class="material-icons">search</i>
-      <div class="ripple-container"></div>
-    </button>
+    <div style="text-align:center">
+      <button
+        name="filtro"
+        mat-raised-button
+        type="submit"
+        class="btn btn-white btn-round btn-just-icon"
+      >
+        <i class="material-icons">search</i>
+        <div class="ripple-container"></div>
+      </button>
+      <button id="btn_novo" type="button" class="btn btn-success btn-novo" routerLink="contato/cadastro"
+        ngbTooltip="Novo Contato" style="margin:8px;">{{lblBtnNovo}}</button>       
+    </div>
   </form>
 </div>
-<app-contato-list
-  [pager]="pager"
-  (paginar)="paginar($event)"
+<app-contato-list  
+  [pager]="pager"  
 ></app-contato-list>

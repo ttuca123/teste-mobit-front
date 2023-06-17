@@ -20,6 +20,7 @@ import { PageForm } from 'src/app/utils/page-form';
 export class ContatoListComponent implements OnInit {
   @Input('pager') pager: PageForm = new PageForm();
   @Input('filtrado') filtrado?: boolean;
+  @Input('lista') lista: any;
   @Output('paginar') paginar: EventEmitter<any> = new EventEmitter();
 
   pageAtual = 1;
@@ -27,8 +28,7 @@ export class ContatoListComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    this.pager = new PageForm();
+  ngOnInit() {    
   }
 
   pageChanged(event: any): void {
@@ -36,4 +36,5 @@ export class ContatoListComponent implements OnInit {
     this.pageAtual = event.pageIndex;
     this.paginar.emit();
   }
+   
 }

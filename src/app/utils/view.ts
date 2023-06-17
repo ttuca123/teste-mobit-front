@@ -15,6 +15,7 @@ export class View {
   error = false;
   cpfValido = false;
   lblBtnSalvar = 'Salvar';
+  lblBtnNovo = 'Novo';
 
   constructor(public tela: string, public loading: MatDialog) {}
 
@@ -23,6 +24,10 @@ export class View {
       width: '150px',
       disableClose: true,
     });
+  }
+
+  fecharLoading() {
+    this.loading.closeAll();
   }
 
   /**
@@ -37,6 +42,7 @@ export class View {
     this.submitted = true;
     this.error = false;
   }
+   
 
   /**
    * ```
@@ -51,11 +57,5 @@ export class View {
     this.error = false;
   }
 
-  atualizaCpf(cpf: string) {
-    //this.usuario.cpf = cpf;
-
-    this.cpfValido = isCPF(cpf);
-
-    //console.log(this.cpfValido);
-  }
+ 
 }

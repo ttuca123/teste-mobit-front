@@ -17,7 +17,7 @@ export class ContatoService {
 
   public novo(): Contato {
     let contato: Contato = {
-      codigo: '',
+      codigo: undefined,
       nome: '',
       sobrenome: '',
       cpf: '',
@@ -71,6 +71,26 @@ export class ContatoService {
 
     return this.http.get(endpoint, { params });
   }
+
+
+  /**
+   * ```
+   * Recupera a lista com os 10 primeiros Contatos ordendo pelo Atributo nome
+   *
+   * ```
+   * @param id
+   * @returns Observable<any>
+   *
+   * @author Artur Cavalcante
+   * @since 16-06-2023 14:36
+   */
+  public findDezContatosOrderByNome(): Observable<any> {
+    let endpoint = `${this.URL_BASE}`;
+
+    return this.http.get(`${endpoint}/`);
+  }
+
+
 
   /**
    * ```

@@ -8,22 +8,30 @@ import { ContatoFilterComponent } from './components/contato/contato-filter/cont
 import { ContatoListComponent } from './components/contato/contato-list/contato-list.component';
 import { ContatoFormComponent } from './components/contato/contato-form/contato-form.component';
 import { ContatoModule } from './components/contato/contato.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material.module';
 import { LoadingComponent } from './components/dialogs/loading/loading.component';
+import { IConfig, NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: true,
+};
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule,        
+    ReactiveFormsModule, 
     ContatoModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    MaterialModule,      
+       
   ],
-  providers: [],
+  providers: [    
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

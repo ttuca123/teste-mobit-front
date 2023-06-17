@@ -1,5 +1,5 @@
 export interface Contato {
-  codigo?: string;
+  codigo?: number;
   nome?: string;
   sobrenome?: string;
   cpf?: string;

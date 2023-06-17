@@ -15,6 +15,7 @@
     "@angular/common": "^16.1.0",
     "@angular/compiler": "^16.1.0",
     "@angular/core": "^16.1.0",
+    "@angular/flex-layout": "^7.0.0-beta.24",
     "@angular/forms": "^16.1.0",
     "@angular/material": "^16.1.1",
     "@angular/platform-browser": "^16.1.0",
@@ -23,7 +24,7 @@
     "bootstrap": "4.3.1",
     "bootstrap-material-design": "4.1.2",
     "brazilian-values": "^0.5.0",
-    "flex-layout": "^1.0.1",
+    "ngx-mask": "^16.1.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
