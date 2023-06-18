@@ -1,6 +1,6 @@
 <div class="card-body table-responsive">
   <form
-    #microsoftUpdateFilter="ngForm"
+    #contatoFilter="ngForm"
     class="navbar-form"
     (ngSubmit)="buscar()"
   >
@@ -12,8 +12,11 @@
         required
         placeholder="Nome"
         [(ngModel)]="filtro.nome"
-        #Nome="ngModel"
+        #nomeField="ngModel"        
       />
+      <mat-error *ngIf="nomeField.invalid">
+                      <p>Campo Nome é obrigatório</p>
+                    </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -32,6 +35,7 @@
       <input
         name="cpf"
         matInput
+        [mask]="mascaraCPF"
         placeholder="Cpf"
         [(ngModel)]="filtro.cpf"
         #Cpf="ngModel"
@@ -43,6 +47,8 @@
         mat-raised-button
         type="submit"
         class="btn btn-white btn-round btn-just-icon"
+        [disabled]="!contatoFilter.valid"
+
       >
         <i class="material-icons">search</i>
         <div class="ripple-container"></div>
@@ -52,6 +58,9 @@
     </div>
   </form>
 </div>
+
+<div *ngIf="buscaFiltro">
 <app-contato-list  
   [pager]="pager"  
 ></app-contato-list>
+</div>

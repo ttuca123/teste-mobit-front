@@ -33,20 +33,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
-  <div class="card text-right">
-    <h4>
-      <div class="card-footer">Total: {{ pager.totalElements }}</div>
-    </h4>
-  </div>
-  <div class="card text-center">
-    <b>
-      <mat-paginator
-        [length]="pager.totalElements"
-        (page)="pageChanged($event)"
-        [pageSize]="pager.size"
-      >
-      </mat-paginator>
-    </b>
-  </div>
+  
 </mat-card>

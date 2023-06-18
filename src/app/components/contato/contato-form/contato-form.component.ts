@@ -59,11 +59,11 @@ export class ContatoFormComponent extends View implements OnInit {
           }
         );
       }
-    });
+    });    
   }
 
   onSubmit() {
-    console.log(JSON.stringify(this.contato));
+    
     if (
       this.contato != undefined &&
       (this.contato.codigo == undefined)
@@ -79,17 +79,21 @@ export class ContatoFormComponent extends View implements OnInit {
    *
    */
   inserir() {
+    this.contato.cpf =  this.formatarCpfSomenteDigitos(this.contato.cpf);
+    //console.log(JSON.stringify(this.contato));
+    console.log(this.contato.cpf.length);
+
     this.exibirLoading();
     this.contatoSub = this.contatoService
       .save(this.contato)
       .subscribe((payload) => {
         this.exibirSucesso();
         this.limpar();
-        this.fecharLoading();        
+        this.fecharLoading();
+        //this.contato = this.contatoService.novo();        
       }, err => {
         console.error(err);        
         this.fecharLoading();
-
       });
   }
 

@@ -16,6 +16,7 @@ export class View {
   cpfValido = false;
   lblBtnSalvar = 'Salvar';
   lblBtnNovo = 'Novo';
+  mascaraCPF = "000.000.000-00";
 
   constructor(public tela: string, public loading: MatDialog) {}
 
@@ -55,6 +56,11 @@ export class View {
   limpar() {
     this.submitted = false;
     this.error = false;
+  }
+
+  formatarCpfSomenteDigitos(valor: string): string {
+
+    return valor.replaceAll('.', '').replaceAll('-', '').replaceAll(' ', '');
   }
 
  

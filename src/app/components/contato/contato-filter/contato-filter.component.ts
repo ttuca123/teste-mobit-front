@@ -25,8 +25,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./contato-filter.component.scss'],
 })
 export class ContatoFilterComponent extends View implements OnInit, OnDestroy, DoCheck {
-  @Input() filtro: any;
+  filtro: Contato;
   pager: PageForm = new PageForm();
+  buscaFiltro: boolean = true;
   
   subscription?: Subscription;
   @Output() filtrar = new EventEmitter<any>();
@@ -54,10 +55,10 @@ export class ContatoFilterComponent extends View implements OnInit, OnDestroy, D
   public buscarDezContatos() {
 
     this.contatoService.findDezContatosOrderByNome()
-    .subscribe((payload: [])=> {
+    .subscribe((payload: any)=> {
       this.fecharLoading();
-      console.log(JSON.stringify(payload));
-      this.pager.content = payload;      
+      
+     this.pager.content = payload;      
 
     }, (err: any) => {
 
@@ -69,11 +70,15 @@ export class ContatoFilterComponent extends View implements OnInit, OnDestroy, D
     this.buscar();
   }
 
-  public buscar() {
+  public buscar() {    
+    this.buscaFiltro = false;
+    
     (this.subscription = this.contatoService
-      .filter(this.pager.pageable.pageNumber, this.pager.size, this.filtro)
-      .subscribe((page: any) => {
-        this.pager = page;
+      .filter(this.filtro)
+      .subscribe((payload: any) => {
+        this.pager.content = payload;
+        console.log(this.pager.content);
+        this.buscaFiltro = true;
       })),
       (err: any) => {
         console.error(err);

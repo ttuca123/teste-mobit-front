@@ -14,6 +14,7 @@ import { MaterialModule } from './modules/material.module';
 import { LoadingComponent } from './components/dialogs/loading/loading.component';
 import { IConfig, NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
 
+
 const maskConfig: Partial<IConfig> = {
   validation: true,
 };
@@ -27,8 +28,7 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule, 
     ContatoModule,
     BrowserAnimationsModule,
-    MaterialModule,      
-       
+    MaterialModule,   
   ],
   providers: [    
   ],

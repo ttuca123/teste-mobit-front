@@ -56,18 +56,14 @@ export class ContatoService {
    * @param obj
    * @returns Observable de Lista de Patchs paginado
    */
-  public filter(
-    page: number,
-    linesPerPage: number,
+  public filter(    
     obj: Contato
   ): Observable<any> {
-    page = page < 0 ? 0 : page;
-    let endpoint = `${this.URL_BASE}`;
+    
+    let endpoint = `${this.URL_BASE}/filtros`;
 
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('linesPerPage', linesPerPage.toString())
-      .set('filter', JSON.stringify(obj));
+    const params = new HttpParams()      
+      .set('payload', JSON.stringify(obj));
 
     return this.http.get(endpoint, { params });
   }

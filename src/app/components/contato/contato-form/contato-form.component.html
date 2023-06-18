@@ -102,13 +102,11 @@
                       id="cpf"
                       name="cpf"
                       autocomplete="off"
-                      required
-                      minlength="14"
-                      maxlength="14"
+                      required                      
+                      maxlength="15"
                       matInput
-                      type="text"
-                      value=""
-                      mask="000.000.000-00"
+                      type="text"                      
+                      [mask]="mascaraCPF"
                       placeholder="CPF"                      
                       #cpfField="ngModel"
                       [(ngModel)]="contato.cpf"
@@ -154,7 +152,7 @@
           mat-button
           color="primary"
           type="submit"
-          [disabled]="contatoForm.valid"
+          [disabled]="!contatoForm.valid"
         >
           <!--<mat-icon>done</mat-icon>-->{{ lblBtnSalvar }}
         </button>
