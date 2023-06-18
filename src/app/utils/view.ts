@@ -1,6 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingComponent } from '../components/dialogs/loading/loading.component';
 import { isCPF } from 'brazilian-values';
+import { Subscription } from 'rxjs';
 
 /**
  * ```
@@ -17,14 +18,16 @@ export class View {
   lblBtnSalvar = 'Salvar';
   lblBtnNovo = 'Novo';
   mascaraCPF = "000.000.000-00";
-  mascaraCEP= "00.000-000"
+  mascaraCEP= "00.000-000";
+  subscription?: Subscription;  
 
   constructor(public tela: string, public loading: MatDialog) {}
 
-  exibirLoading() {
+  exibirLoading(mensagem) {
     this.loading.open(LoadingComponent, {
       width: '150px',
       disableClose: true,
+      data: mensagem
     });
   }
 

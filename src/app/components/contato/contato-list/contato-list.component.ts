@@ -1,40 +1,37 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DoCheck,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
+import {  
+  Component,  
+  Input  
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ContatoService } from 'src/app/services/contato.service';
 import { PageForm } from 'src/app/utils/page-form';
+import { View } from 'src/app/utils/view';
 
 @Component({
   selector: 'app-contato-list',
   templateUrl: './contato-list.component.html',
   styleUrls: ['./contato-list.component.scss'],
 })
-export class ContatoListComponent implements OnInit {
-  @Input('pager') pager: PageForm = new PageForm();
-  @Input('filtrado') filtrado?: boolean;
-  @Input('lista') lista: any;
-  @Output('paginar') paginar: EventEmitter<any> = new EventEmitter();
+export class ContatoListComponent extends View {
+  @Input('pager') pager: PageForm = new PageForm();  
+  
+  displayedColumns: string[] = ['codigo', 'nome', 'sobrenome', 'cpf', 'email', 'update', 'remover'];
 
-  pageAtual = 1;
-  displayedColumns: string[] = ['codigo', 'nome', 'sobrenome', 'cpf', 'email'];
+  constructor(public override loading: MatDialog, public contatoService: ContatoService ) {
 
-  constructor() {}
+    super('Lista de Contatos', loading);
+  } 
 
-  ngOnInit() {    
-  }
-
-  pageChanged(event: any): void {
-    this.pager.pageable.pageNumber = event.pageIndex;
-    this.pageAtual = event.pageIndex;
-    this.paginar.emit();
+  remover(id: number){
+    this.exibirLoading('Removendo Contato');
+    this.contatoService.remover(id).subscribe(_ => {
+      this.pager.content = this.pager.content.filter(payload => payload.codigo!=id);
+      this.fecharLoading();
+    }, err=> {
+      console.error(err);
+      this.fecharLoading();
+      alert('Ocorreu um erro!');
+    });
   }
    
 }

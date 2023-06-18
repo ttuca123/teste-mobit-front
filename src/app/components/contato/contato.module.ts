@@ -9,6 +9,7 @@ import { ContatoComponent } from './contato.component';
 import { MaterialModule } from 'src/app/modules/material.module';
 import { ContatoRoutingModule } from './contato-routing.module';
 import { IConfig, NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+import { ContatoEnderecoFormComponent } from './contato-endereco-form/contato-endereco-form.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, MaterialModule, ContatoRoutingModule, NgxMaskDirective],
@@ -17,6 +18,7 @@ import { IConfig, NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } 
     ContatoFilterComponent,
     ContatoListComponent,
     ContatoFormComponent,
+    ContatoEnderecoFormComponent,    
   ],
   exports: [],
   providers: [      

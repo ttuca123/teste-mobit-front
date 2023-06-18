@@ -24,13 +24,10 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './contato-filter.component.html',
   styleUrls: ['./contato-filter.component.scss'],
 })
-export class ContatoFilterComponent extends View implements OnInit, OnDestroy, DoCheck {
+export class ContatoFilterComponent extends View implements OnInit, OnDestroy {
   filtro: Contato;
-  pager: PageForm = new PageForm();
-  buscaFiltro: boolean = true;
+  pager: PageForm = new PageForm();    
   
-  subscription?: Subscription;
-  @Output() filtrar = new EventEmitter<any>();
 
   constructor(
     private contatoService: ContatoService,
@@ -41,10 +38,7 @@ export class ContatoFilterComponent extends View implements OnInit, OnDestroy, D
     super('Cadastro de Contatos', loading);
   }
 
-  //Hook responsável por detectar mudanças nos valores dos campos
-  ngDoCheck(): void {
-    this.pager.filtrado = false;
-  }
+  
 
   ngOnInit() {
     this.filtro = this.contatoService.novo();
@@ -53,33 +47,33 @@ export class ContatoFilterComponent extends View implements OnInit, OnDestroy, D
   }
 
   public buscarDezContatos() {
-    this.exibirLoading();
-    this.contatoService.findDezContatosOrderByNome()
+    this.exibirLoading('Buscando Dez Contatos');
+    this.subscription = this.contatoService.findDezContatosOrderByNome()
     .subscribe((payload: any)=> {
       this.fecharLoading();      
       this.pager.content = payload;      
 
     }, (err: any) => {
-
+        this.fecharLoading();      
       
     });
   }
   
 
   public buscar() {    
-    this.buscaFiltro = false;
+    
     this.pager = new PageForm();
     
+    this.exibirLoading('Filtrando Contatos');
     (this.subscription = this.contatoService
       .filter(this.filtro)
       .subscribe((payload: any) => {
-        this.pager.content = payload;
-        console.log(this.pager.content);
-        this.buscaFiltro = true;
-      })),
-      (err: any) => {
+        this.pager.content = payload;        
+        this.fecharLoading();
+      }, (err: any) => {
         console.error(err);
-      };
+        this.fecharLoading();
+      }));
   }
 
   ngOnDestroy(): void {

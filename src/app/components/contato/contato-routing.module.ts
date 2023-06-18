@@ -6,16 +6,16 @@ import { ContatoComponent } from './contato.component';
 
 const routes: Routes = [
   {
-    path: 'contrato/cadastro',
+    path: 'contato/cadastro',
     redirectTo: 'cadastro',
   },
   {
-    path: 'contrato/cadastro',
+    path: 'contato/cadastro',
     component: ContatoFormComponent,
     pathMatch: 'full'
   },
   {
-    path: 'contrato-list',
+    path: 'contato-list',
     component: ContatoListComponent,
     pathMatch: 'full'
   },

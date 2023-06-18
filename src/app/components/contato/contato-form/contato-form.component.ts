@@ -8,7 +8,6 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { isCPF } from 'brazilian-values';
-import { Subscription } from 'rxjs';
 import { Contato } from 'src/app/dto/contato';
 import { Endereco } from 'src/app/dto/endereco';
 import { ContatoService } from 'src/app/services/contato.service';
@@ -27,17 +26,7 @@ import { View } from 'src/app/utils/view';
  * @since 16-06-2023
  */
 export class ContatoFormComponent extends View implements OnInit {
-  contato: Contato;
-  contatoSub?: Subscription;
-  endereco: Endereco = {
-    cep: '',
-    bairro: '',
-    logradouro: '',
-    cidade: '',
-    uf: '',
-    tipo: ''
-  }
-
+  contato: Contato;     
 
   nomeField = new FormControl('', [Validators.required]);
   sobrenomeField = new FormControl('', [Validators.required]);
@@ -45,8 +34,7 @@ export class ContatoFormComponent extends View implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(
-    private contatoService: ContatoService,
-    private geoService: GeoService,
+    private contatoService: ContatoService,    
     private route: ActivatedRoute,
     private router: Router,
     public override loading: MatDialog
@@ -55,9 +43,10 @@ export class ContatoFormComponent extends View implements OnInit {
   }
 
   ngOnInit() {
-    this.contato = this.contatoService.novo();
+    this.contato = this.contatoService.novo();    
     this.route.params.subscribe((parametros: Params) => {
-      const codigo = parametros['codigo'];
+      const codigo = parametros['id'];
+
 
       if (codigo) {
         this.contatoService.mapParams(parametros);
@@ -65,6 +54,8 @@ export class ContatoFormComponent extends View implements OnInit {
         this.contatoService.findById(codigo).subscribe(
           (contato) => {
             this.contato = contato;
+
+            console.log(this.contato);
           },
           (err) => {
             console.error(err);
@@ -73,6 +64,7 @@ export class ContatoFormComponent extends View implements OnInit {
       }
     });    
   }
+  
 
   onSubmit() {
     
@@ -91,58 +83,27 @@ export class ContatoFormComponent extends View implements OnInit {
    *
    */
   inserir() {
-    this.contato.cpf =  this.formatarCpfSomenteDigitos(this.contato.cpf);
-    //console.log(JSON.stringify(this.contato));
-    console.log(this.contato.cpf.length);
-
-    this.exibirLoading();
-    this.contatoSub = this.contatoService
+    this.contato.cpf =  this.formatarCpfSomenteDigitos(this.contato.cpf);               
+    this.exibirLoading('Salvando Contato');
+    this.subscription = this.contatoService
       .save(this.contato)
-      .subscribe((payload) => {
+      .subscribe((_) => {
         this.exibirSucesso();
         this.limpar();
         this.fecharLoading();
-        //this.contato = this.contatoService.novo();        
+        //this.contato = this.contatoService.novo();
+        alert('Inclusão realizada com sucesso!');
+        
       }, err => {
+        alert('Ocorreu um erro!');
         console.error(err);        
         this.fecharLoading();
-      });
+      }); 
   }
 
-  buscarCep(cep: string){
-    
-    if(cep.length==8){
-      this.exibirLoading();
-      this.geoService.findEnderecoByCep(cep)
-      .subscribe(payload => {
-        this.fecharLoading();   
-        this.preencherEndereco(payload);        
-      }, err=> {
-        console.error(err);
-        this.fecharLoading();
-      });
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
-
-  }
-
-  preencherEndereco(payload) {
-    this.endereco.logradouro = payload.logradouro;
-    this.endereco.bairro = payload.bairro;
-    this.endereco.cidade = payload.localidade;
-    this.endereco.uf = payload.uf;
-  }
-
-
-  voltar() {    
-
-    this.router.navigate(['/contato']);
-  }
-
-  atualizaCpf(cpf: string) {
-    this.contato.cpf = cpf;
-
-    this.cpfValido = isCPF(cpf);
-
-    
   }
 }

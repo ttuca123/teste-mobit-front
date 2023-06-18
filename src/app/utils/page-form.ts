@@ -1,5 +1,5 @@
 export class PageForm {
-  content: [] = [];
+  content: Array<any> = new Array<any>;
 
   pageable = {
     sort: {

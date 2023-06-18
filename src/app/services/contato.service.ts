@@ -22,6 +22,7 @@ export class ContatoService {
       sobrenome: '',
       cpf: '',
       email: '',
+      enderecos: [] = []
     };
 
     return contato;
@@ -119,5 +120,21 @@ export class ContatoService {
     let endpoint = `${this.URL_BASE}`;
 
     return this.http.post(`${endpoint}`, obj);
+  }
+
+
+  /**
+   * ```
+   * Envia uma requisição DELETE  para remover contato
+   *  ```
+   *
+   * @param id .
+   *
+   * @return An `Observable` da resposta.
+   */
+  public remover(id: number): Observable<any> {
+    let endpoint = `${this.URL_BASE}/${id}`;
+
+    return this.http.delete(`${endpoint}`);
   }
 }
