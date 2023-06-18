@@ -95,8 +95,6 @@
                   <p></p>
                   <p></p>
                 
-
-                
                   <mat-form-field >
                     <input
                       id="cpf"
@@ -145,6 +143,146 @@
               
             </mat-card-content>
           </mat-tab>
+          <mat-tab label="Dados Endereço">
+            <mat-card-content fxLayout="column" fxLayoutAlign="left">
+              
+                <div fxFlex="100" fxLayoutAlign="start">
+                  <h4>Dados Endereço:</h4>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>Tipo de Endereço</mat-label>
+                  <mat-select [(ngModel)]="endereco.tipo" id="tipoEndereco" name="tipoEndereco" required>
+                    
+                    <mat-option value="R">
+                      Residencial
+                    </mat-option>
+                    <mat-option value="T">
+                      Trabalho
+                    </mat-option>                    
+                  </mat-select>
+                </mat-form-field>
+
+                <p></p>
+                <p></p>
+
+                <mat-form-field >
+                    <input
+                      id="cep"
+                      name="cep"
+                      autocomplete="off"
+                      required                      
+                      maxlength="10"
+                      matInput
+                      type="text"                      
+                      [mask]="mascaraCEP"
+                      placeholder="CEP"                      
+                      #cepField="ngModel"
+                      [(ngModel)]="endereco.cep"
+                      (blur)="buscarCep(cepField.value)"
+                      
+                    />
+
+                    <mat-error *ngIf="cepField.invalid">
+                      <p>Campo Cep é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <p></p>
+                  <p></p>
+
+                  <mat-form-field >
+                    <input
+                      id="logradouro"
+                      name="logradouro"
+                      autocomplete="off"
+                      required                      
+                      maxlength="50"
+                      matInput
+                      type="text"                                            
+                      placeholder="Logradouro"                      
+                      #logradouroField="ngModel"
+                      [(ngModel)]="endereco.logradouro"
+                    />
+
+                    <mat-error *ngIf="logradouroField.invalid">
+                      <p>Campo Logradouro é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+                    <p></p>
+                    <p></p>
+                  <mat-form-field >
+                    <input
+                      id="bairro"
+                      name="bairro"
+                      disabled
+                      autocomplete="off"
+                      required                      
+                      maxlength="50"
+                      matInput
+                      type="text"                                            
+                      placeholder="Bairro"                      
+                      #bairroField="ngModel"
+                      [(ngModel)]="endereco.bairro"
+                    />
+
+                    <mat-error *ngIf="bairroField.invalid">
+                      <p>Campo Bairro é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+                  <p></p>
+                  <p></p>
+
+                  
+                  <mat-form-field >
+                    <input
+                      id="localidade"
+                      name="localidade"
+                      autocomplete="off"
+                      disabled                      
+                      maxlength="50"
+                      matInput
+                      type="text"                                            
+                      placeholder="Cidade"                      
+                      #cidadeField="ngModel"
+                      [(ngModel)]="endereco.cidade"
+                    />
+
+                    <mat-error *ngIf="cidadeField.invalid">
+                      <p>Campo Cidade é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+                  <p></p>
+                  <p></p>
+
+                  <mat-form-field >
+                    <input
+                      id="uf"
+                      name="uf"
+                      autocomplete="off"
+                      disabled                      
+                      maxlength="2"
+                      matInput
+                      type="text"                                            
+                      placeholder="Estado"                      
+                      #ufField="ngModel"
+                      [(ngModel)]="endereco.uf"
+                    />
+
+                    <mat-error *ngIf="ufField.invalid">
+                      <p>Campo Estado é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+                  <p></p>
+                  <p></p>
+
+
+
+
+
+            </mat-card-content>
+          </mat-tab>
+
         </mat-tab-group>
         <button
           id="btn_salvar"

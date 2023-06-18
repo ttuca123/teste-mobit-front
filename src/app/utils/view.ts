@@ -17,6 +17,7 @@ export class View {
   lblBtnSalvar = 'Salvar';
   lblBtnNovo = 'Novo';
   mascaraCPF = "000.000.000-00";
+  mascaraCEP= "00.000-000"
 
   constructor(public tela: string, public loading: MatDialog) {}
 

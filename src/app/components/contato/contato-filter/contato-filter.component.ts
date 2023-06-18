@@ -53,25 +53,22 @@ export class ContatoFilterComponent extends View implements OnInit, OnDestroy, D
   }
 
   public buscarDezContatos() {
-
+    this.exibirLoading();
     this.contatoService.findDezContatosOrderByNome()
     .subscribe((payload: any)=> {
-      this.fecharLoading();
-      
-     this.pager.content = payload;      
+      this.fecharLoading();      
+      this.pager.content = payload;      
 
     }, (err: any) => {
 
-
+      
     });
   }
-
-  public paginar($event: any) {
-    this.buscar();
-  }
+  
 
   public buscar() {    
     this.buscaFiltro = false;
+    this.pager = new PageForm();
     
     (this.subscription = this.contatoService
       .filter(this.filtro)

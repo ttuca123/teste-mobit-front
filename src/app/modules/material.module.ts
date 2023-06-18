@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [],
@@ -22,7 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatTabsModule,
     HttpClientModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
     
   ],
   declarations: [],

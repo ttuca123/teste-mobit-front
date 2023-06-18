@@ -10,7 +10,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { isCPF } from 'brazilian-values';
 import { Subscription } from 'rxjs';
 import { Contato } from 'src/app/dto/contato';
+import { Endereco } from 'src/app/dto/endereco';
 import { ContatoService } from 'src/app/services/contato.service';
+import { GeoService } from 'src/app/services/geo.service';
 import { View } from 'src/app/utils/view';
 
 
@@ -27,6 +29,15 @@ import { View } from 'src/app/utils/view';
 export class ContatoFormComponent extends View implements OnInit {
   contato: Contato;
   contatoSub?: Subscription;
+  endereco: Endereco = {
+    cep: '',
+    bairro: '',
+    logradouro: '',
+    cidade: '',
+    uf: '',
+    tipo: ''
+  }
+
 
   nomeField = new FormControl('', [Validators.required]);
   sobrenomeField = new FormControl('', [Validators.required]);
@@ -35,6 +46,7 @@ export class ContatoFormComponent extends View implements OnInit {
 
   constructor(
     private contatoService: ContatoService,
+    private geoService: GeoService,
     private route: ActivatedRoute,
     private router: Router,
     public override loading: MatDialog
@@ -95,6 +107,29 @@ export class ContatoFormComponent extends View implements OnInit {
         console.error(err);        
         this.fecharLoading();
       });
+  }
+
+  buscarCep(cep: string){
+    
+    if(cep.length==8){
+      this.exibirLoading();
+      this.geoService.findEnderecoByCep(cep)
+      .subscribe(payload => {
+        this.fecharLoading();   
+        this.preencherEndereco(payload);        
+      }, err=> {
+        console.error(err);
+        this.fecharLoading();
+      });
+    }
+
+  }
+
+  preencherEndereco(payload) {
+    this.endereco.logradouro = payload.logradouro;
+    this.endereco.bairro = payload.bairro;
+    this.endereco.cidade = payload.localidade;
+    this.endereco.uf = payload.uf;
   }
 
 

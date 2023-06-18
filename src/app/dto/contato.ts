@@ -4,4 +4,5 @@ export interface Contato {
   sobrenome?: string;
   cpf?: string;
   email?: string;
+  enderecos?: []
 }
