@@ -125,6 +125,23 @@ export class ContatoService {
 
   /**
    * ```
+   * Envia uma requisição UP com O id e um corpo JSON e retorna
+   * uma resposta HTTP com o código 204.
+   *  ```
+   *
+   * @param obj O objeto Contato.
+   *
+   * @return An `Observable` da resposta, com o status da resposta do servidor.
+   */
+  public update(id: number, obj?: Contato): Observable<any> {
+    let endpoint = `${this.URL_BASE}/${id}`;
+
+    return this.http.put(`${endpoint}`, obj);
+  }
+
+
+  /**
+   * ```
    * Envia uma requisição DELETE  para remover contato
    *  ```
    *
@@ -134,6 +151,22 @@ export class ContatoService {
    */
   public remover(id: number): Observable<any> {
     let endpoint = `${this.URL_BASE}/${id}`;
+
+    return this.http.delete(`${endpoint}`);
+  }
+
+
+  /**
+   * ```
+   * Envia uma requisição DELETE  para remover endereço
+   *  ```
+   *
+   * @param id .
+   *
+   * @return An `Observable` da resposta.
+   */
+  public removerEndereco(id: number): Observable<any> {
+    let endpoint = `${this.URL_BASE}/enderecos/${id}`;
 
     return this.http.delete(`${endpoint}`);
   }

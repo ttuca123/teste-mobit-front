@@ -73,8 +73,37 @@ export class ContatoFormComponent extends View implements OnInit {
       (this.contato.codigo == undefined)
     ) {
       this.inserir();
+    }else{
+
+      this.update();
     }
   }
+
+
+  /**
+   * ```
+   * Update de Contato
+   * ```
+   * @author Artur Cavalcante
+   */
+  update(){
+      this.contato.cpf =  this.formatarCpfSomenteDigitos(this.contato.cpf);    
+      this.exibirLoading('Atualizando Contato');
+      this.subscription = this.contatoService
+      .update(this.contato.codigo, this.contato)
+      .subscribe(_ => {
+        this.fecharLoading();
+        alert('Atualização realizada com sucesso!');
+      }, err=> {
+        alert('Ocorreu um erro!');
+        console.error(err);        
+        this.fecharLoading();
+      })
+
+
+
+  }
+
 
   /**
    * ```
@@ -91,7 +120,7 @@ export class ContatoFormComponent extends View implements OnInit {
         this.exibirSucesso();
         this.limpar();
         this.fecharLoading();
-        //this.contato = this.contatoService.novo();
+        this.contato = this.contatoService.novo();
         alert('Inclusão realizada com sucesso!');
         
       }, err => {

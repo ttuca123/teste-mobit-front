@@ -32,7 +32,11 @@ constructor(
 
 
   ngOnInit() {
-    this.novoEndereco();       
+    this.novoEndereco(); 
+    if(this.contato.codigo!=undefined){
+      alert('contato existe');
+    }
+    
   }
 
   novoEndereco() {    
@@ -48,12 +52,31 @@ constructor(
 
   remover(endereco){
     console.log(endereco);
+    if(this.endereco.id!=null){
+      this.removerEnderecoServer(this.endereco.id);
+
+    }
     this.contato.enderecos = this.contato.enderecos.filter(e => e != endereco);    
     this.table.renderRows();
   }
 
+
+  removerEnderecoServer(id: number) {
+
+    this.exibirLoading('Removendo Endereço');
+    this.contatoService.removerEndereco(id)
+    .subscribe(_ => {
+      this.fecharLoading();
+      alert('Endereço removido com sucesso.')
+    }, err=> {
+      console.error(err);
+      alert('Oocrreu um erro.')
+    })
+  }
+
   addEndereco() {    
         
+    this.endereco.cep.replaceAll('.', '').replaceAll('-', '');
     this.contato.enderecos.push(this.endereco);
     this.table.renderRows();
     this.novoEndereco();    
