@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm i -f
       - name: Build
-        run: npm run build      
+        run: ng build --prod --base-href /src --deploy-url /public       
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v1
