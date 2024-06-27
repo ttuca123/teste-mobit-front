@@ -24,6 +24,6 @@ jobs:
 
     - name: Build
       run: |       
-        npm install  webpack-cli -g
+        npm install  webpack-cli -g --silent
         npm install --legacy-peer-deps
         npx webpack
