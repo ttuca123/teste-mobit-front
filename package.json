@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --base-href https://ttuca123.github.io/angular-github-actions/",
+    "build": "ng build --configuration production --base-href https://ttuca123.github.io/teste-mobit-front//",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

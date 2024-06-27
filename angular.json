@@ -21,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",
+            "outputPath": "dist/angular-github-actions",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
