@@ -23,6 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Build
-      run: |        
+      run: |       
+        npm install  webpack-cli -g
         npm install --legacy-peer-deps
         npx webpack
