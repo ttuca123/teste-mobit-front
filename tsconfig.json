@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strictPropertyInitialization": false,
-    "baseUrl": "./",
+    "baseUrl": "./teste-mobit-front",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
