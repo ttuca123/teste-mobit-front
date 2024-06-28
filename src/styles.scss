@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-card-style {
+    margin-top: 20px;
+    background: white;
+    max-height: 2500px;
+}
+
+.margin-separator {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+@media (max-width: 992px) {
+        
+    .margin-separator {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .title-card {
+        text-align: center;
+        margin-top: 15px;
+        width: auto;
+    }
+
+    .items-card {
+        text-align: left;
+        font-size: 11px;        
+    }
+
+    .button-structure {
+        text-align: center;
+        width: 100%;
+    }
+
+    .tabela {
+        display: none;        
+    }
+    .cards-style {
+        display: block;
+        max-width: 350px;
+        margin: auto;
+    }
+
+    .entre-card {
+        margin-right: 20px;
+        margin-left: 20px;
+        max-width: 350px;
+        min-width: auto;
+        background-color: #f3f5f8;
+        box-shadow: gainsboro 0px 0px 5px 5px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .tabela {
+        display: block;
+    }
+    .cards-style {
+        display: none;
+    }
+}
+
+

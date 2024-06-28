@@ -1,0 +1,176 @@
+<form
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    #contatoForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    id="form_contato"
+  >
+  
+    <div layout="row" layout-align="center center" style="margin: 5px">
+      <button class="btn btn-primary btn-voltar" id="voltar" type="button" mat-button routerLink="/contato" >Voltar</button>
+    </div>
+    <div align="center" layout="row" layout-align="center center">
+      <mat-card
+        class="info-card mat-elevation-z8"
+       
+        style="margin-top: 40px; max-width: 800px"
+      >
+        <mat-card-title> Contato </mat-card-title>
+        <mat-card-subtitle> Cadastro</mat-card-subtitle>
+
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Dados Contato">
+            <mat-card-content fxLayout="column" fxLayoutAlign="left">
+              
+                <div fxFlex="100" fxLayoutAlign="start">
+                  <h4>Dados Pessoais:</h4>
+                </div>
+                <div
+                  fxFlex="100"
+                  fxLayout="row"
+                  fxLayoutAlign="space-between  start"
+                >
+                  <mat-form-field >
+                    
+                    <input
+                      id="codigo"
+                      name="codigo"
+                      autocomplete="off"
+                      required
+                      disabled
+                      matInput
+                      type="text"
+                      class="form-control"
+                      value=""
+                      placeholder="Código"
+                      [(ngModel)]="contato.codigo"
+                      #codigoField="ngModel"
+                    />
+                  </mat-form-field>
+                </div>
+                
+                  <mat-form-field >
+                    <mat-label>Nome</mat-label>
+                    <input
+                      id="nome"
+                      name="nome"
+                      autocomplete="off"
+                      required
+                      minlength="3"
+                      maxlength="100"
+                      matInput
+                      type="text"
+                      class="form-control"
+                      value=""
+                      placeholder="Nome"
+                      [(ngModel)]="contato.nome"
+                      #nomeField="ngModel"
+                    />
+                    <mat-error *ngIf="nomeField.invalid">
+                      <p>Campo Nome é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  
+                  <mat-form-field >
+                    <mat-label>SobreNome</mat-label>
+                    <input
+                      id="sobrenome"
+                      name="sobrenome"
+                      autocomplete="off"   
+                      required                   
+                      minlength="3"
+                      maxlength="100"
+                      matInput
+                      type="text"
+                      class="form-control"
+                      value=""
+                      placeholder="SobreNome"
+                      [(ngModel)]="contato.sobrenome"
+                      #sobrenomeField="ngModel"
+                    />
+                    <mat-error *ngIf="sobrenomeField.invalid">
+                      <p>Campo SobreNome é obrigatório</p>
+                    </mat-error>                    
+                  </mat-form-field>
+                  <p></p>
+                  <p></p>
+                
+                  <mat-form-field >
+                    <mat-label>Cpf</mat-label>
+                    <input
+                      id="cpf"
+                      name="cpf"
+                      autocomplete="off"
+                      required                      
+                      maxlength="15"
+                      matInput
+                      type="text"                      
+                      [mask]="mascaraCPF"
+                      placeholder="CPF"                      
+                      #cpfField="ngModel"
+                      [(ngModel)]="contato.cpf"
+                      
+                    />
+
+                    <mat-error *ngIf="cpfField.invalid">
+                      <p>Campo Cpf é obrigatório</p>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <p></p>
+                  <p></p>
+                
+                
+                  <mat-form-field >
+                    <mat-label>Email</mat-label>
+                    <input
+                      id="email"
+                      name="email"
+                      autocomplete="off"
+                      required
+                      minlength="7"
+                      matInput
+                      type="email"
+                      class="form-control"
+                      value=""
+                      placeholder="Email"
+                      [(ngModel)]="contato.email"
+                      #emailField="ngModel"
+                    />
+                    <mat-error *ngIf="emailField.invalid">
+                      <p>Digite um email válido</p>
+                    </mat-error>
+                  </mat-form-field>
+                
+              
+            </mat-card-content>
+          </mat-tab>
+          <mat-tab label="Dados Endereço">
+            <mat-card-content>              
+              <app-contato-endereco-form [contato]="contato"></app-contato-endereco-form>
+            </mat-card-content>
+          </mat-tab>
+
+        </mat-tab-group>
+        <button
+          id="btn_salvar"
+          class="btn-salvar"
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!contatoForm.valid"
+        >
+          <!--<mat-icon>done</mat-icon>-->{{ lblBtnSalvar }}
+        </button>
+
+        <mat-hint *ngIf="submitted">
+          <div class="alert alert-success" role="alert">
+            Contato Salvo com Sucesso.
+          </div>
+        </mat-hint>
+      </mat-card>    
+  </div>
+</form>

@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-content>   
+    <form
+      #contatoFilter="ngForm"
+      class="navbar-form"
+      (ngSubmit)="buscar()"
+    >
+      <mat-form-field class="example-full-width">
+        <mat-label>Nome</mat-label>
+        <input
+          name="nome"
+          matInput        
+          placeholder="Nome"
+          [(ngModel)]="filtro.nome"
+          #nomeField="ngModel"        
+        />
+        
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Sobrenome</mat-label>
+        <input
+          name="sobrenome"
+          matInput
+          placeholder="SobreNome"
+          [(ngModel)]="filtro.sobrenome"
+          #SobreNome="ngModel"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Cpf</mat-label>
+        <input
+          name="cpf"
+          matInput
+          [mask]="mascaraCPF"
+          placeholder="Cpf"
+          [(ngModel)]="filtro.cpf"
+          #Cpf="ngModel"
+        />
+      </mat-form-field>
+      <div style="text-align:center">
+        <button
+          name="filtro"
+          mat-raised-button
+          type="submit"
+          class="btn btn-white btn-round btn-just-icon"
+          [disabled]="!contatoFilter.valid"
+        >
+          <div class="ripple-container">Filtrar</div>
+          <i class="material-icons">search</i>
+          
+        </button>
+        <button id="btn_novo" type="button"  class="btn btn-success btn-novo" mat-raised-button routerLink="contato/cadastro"
+          ngbTooltip="Novo Contato" style="margin:8px;">{{lblBtnNovo}}</button>       
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<app-contato-list  
+  [pager]="pager"  
+></app-contato-list>
+
